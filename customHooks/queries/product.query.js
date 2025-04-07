@@ -40,31 +40,21 @@ export const productListQuery = ()=> {
 
 //productEditFn
 
-export const productEditMutation = () => {
-    const { queryClient } = useGlobalHooks()
-    const cookie = new Cookies()
-    return useMutation({
-        mutationFn: productEditFn,
-        onSuccess: (res) => {
-            const { token, status, message,product } = res || {}
-            if (status === 200 && token) {
-                cookie.set("token", token, { path: "/cms/product_edit", secure: true })
-                localStorage.setItem("product", JSON.stringify(product))
-            }
-            toast.success(`${message}`);
-            queryClient.invalidateQueries({ queryKey: ["PRODUCT"] })
-        },
-        onError:(error, variables, context)=> {
-            toast.error(`${error?.response.data.message||error?.message}`);
-            queryClient.invalidateQueries({ queryKey: ["PRODUCT"] })
-        }
-    })
-
+export const producteditQuery=(id)=>{
+    // return useQuery({
+    //     queryKey:['PRODUCT_EDIT',id],
+    //     queryFn:productEditFn(id)
+    // });
+    return useQuery({
+        queryKey: ['PRODUCT_EDIT', id],
+        queryFn: () => productEditFn(id), // Fix: Pass a function reference, NOT call it directly
+        enabled: !!id, // Ensures query only runs when `id` is defined
+    });
 }
 
 export const productupdateMutation = () => {
     const { queryClient } = useGlobalHooks()
-    const cookie = new Cookies()
+    const cookproductCreateMutationie = new Cookies()
     return useMutation({
         mutationFn: productUpdateFn,
         onSuccess: (res) => {
@@ -81,5 +71,4 @@ export const productupdateMutation = () => {
             queryClient.invalidateQueries({ queryKey: ["PRODUCT"] })
         }
     })
-
 }

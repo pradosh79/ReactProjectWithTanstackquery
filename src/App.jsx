@@ -5,9 +5,14 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProductCreate from '../pages/cms/product_create/index'
 import ProductList from '../pages/cms/product_list/index'
-import Updateproduct from '../pages/cms/product_update/index'
+import ProductEdit from '../pages/cms/product_edit/index'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'react-hot-toast';
+import Registration from '../pages/auth/registration/index';
+import Login from '../pages/auth/login';
+import Verify_otp from '../pages/auth/verify_otp';
+import Update_password from '../pages/auth/password/update_password';
+import Forgot_password from '../pages/auth/forgot_password/forgot_password';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -43,9 +48,13 @@ function App() {
     />
         <Router>
           <Routes>
+          <Route path= "/auth/login" element= {<Login/>} />
+            <Route path= "/auth/registration" element= {<Registration/>} />
+            <Route path= "/auth/forgot_password" element= {<Forgot_password/>} />
+            <Route path= "/auth/update_password" element= {<Update_password/>} />
             <Route path="/cms/product_create" element={<ProductCreate />} />
             <Route path="/cms/product_list" element={<ProductList/>} />
-            <Route path= "/cms/update_product/:product_id" element={<Updateproduct/>}/>
+            <Route path= "/cms/product_edit/:product_id" element={<ProductEdit/>}/> 
           </Routes>
         </Router>
       </QueryClientProvider>

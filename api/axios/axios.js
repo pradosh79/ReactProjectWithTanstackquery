@@ -1,7 +1,7 @@
 
 import axios from "axios";
 import { Cookies } from "react-cookie";
-let adminUrl = "https://tureappapiforreact.onrender.com/api";
+let adminUrl = "https://tureappapiforreact.onrender.com/api/";
 
 export const baseURL = adminUrl;
 let axiosInstance = axios.create({
